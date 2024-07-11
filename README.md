@@ -17,6 +17,7 @@ Let's suppose
 * User has sufficient rights to create `USER.ZOWE.TEST` datasets
 * Direct command `/zowe/runtime/bin/zwe install --ds-prefix USER.ZOWE.TEST` ends with success
 * Calling the same command from javascript (via [`runme.sh`](runme.sh)) ends with [`result.txt`](result.txt)
+* Use [this repository](https://github.com/zowe/zowe-install-packaging/tree/v2.x/staging/bin) for investigation
 
 ## C
 Review this code, let's suppose `toEBCDIC` exists and working fine:
