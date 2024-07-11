@@ -73,6 +73,9 @@ static JSValue xplatformLoadFileUTF8(JSContext *ctx, JSValueConst this_val,
 ```
 ## JCL
 This is a JCL template, which could be used for installation. Before submitting this job all `{zowe.*}` variables are replaced with definition from `zowe.yaml`. Is this JCL ok?
+Let's suppose:
+* `JOB` statement is ok
+* All datasets and paths exist
 ```jcl
 //ZWEINSTL JOB 12345678,ZOWEUSER
 //*
