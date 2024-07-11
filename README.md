@@ -32,3 +32,41 @@ void printf2(char *formatString, ...){
   printf("%s\n",text);
 }
 ```
+## Another C
+Why is this code abending? Under which circumstances?
+```c
+/* (filename, ccsid) ccsid -1 implies guess best for platform, 0 implies don't translate */
+static JSValue xplatformLoadFileUTF8(JSContext *ctx, JSValueConst this_val,
+                                     int argc, JSValueConst *argv){
+  size_t size;
+  size_t length;
+  char *buf;
+
+  size_t fLen;
+  const char *filename = JS_ToCStringLen(ctx, &fLen, argv[0]);
+  if (!filename){
+    return JS_EXCEPTION;
+  }
+  int sourceCCSID;
+  JS_ToInt32(ctx, &sourceCCSID, argv[1]);
+
+  buf = (char*)js_load_file(ctx, &length, filename);
+ 
+  if (sourceCCSID < 0){
+    char *nativeBuffer = safeMalloc(length+1,"xplatformStringFromBytes");
+    memcpy(nativeBuffer,buf,length);
+    nativeBuffer[length] = 0;
+    convertFromNative(nativeBuffer,length);
+    js_free(ctx, buf);
+    JSValue ret = JS_NewStringLen(ctx, nativeBuffer, length);
+    safeFree(nativeBuffer,length+1);
+    return ret;
+  } else if (sourceCCSID == 0) {
+    return JS_NewStringLen(ctx, buf, length);
+  } else {
+    printf("string from specific encoding not yet implemented\n");
+    return JS_EXCEPTION;
+  }
+  
+}
+```
