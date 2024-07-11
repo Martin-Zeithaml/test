@@ -71,3 +71,40 @@ static JSValue xplatformLoadFileUTF8(JSContext *ctx, JSValueConst this_val,
   
 }
 ```
+## JCL
+This is a JCL template, which could be used for installation. Before submitting this job all `{zowe.*}` variables are replaced with definition from `zowe.yaml`. Is this JCL ok?
+```jcl
+//ZWEINSTL JOB 12345678,ZOWEUSER
+//*
+//* This program and the accompanying materials are made available
+//* under the terms of the Eclipse Public License v2.0 which
+//* accompanies this distribution, and is available at
+//* https://www.eclipse.org/legal/epl-v20.html
+//*
+//* SPDX-License-Identifier: EPL-2.0
+//*
+//* Copyright Contributors to the Zowe Project. 2020, 2020
+//*
+//*********************************************************************
+//AUTHCPY EXEC PGM=BPXBATCH
+//BPXPRINT DD SYSOUT=*
+//STDOUT   DD SYSOUT=*
+//STDERR   DD SYSOUT=*
+//STDPARM DD *
+SH cd {zowe.runtimeDirectory} &&
+cd files/SZWESAMP &&
+cp * "//'{zowe.setup.dataset.prefix}.SZWESAMP'" &&
+cd ../SZWEEXEC &&
+cp * "//'{zowe.setup.dataset.prefix}.SZWEEXEC'" &&
+cd ../SZWELOAD &&
+cp * "//'{zowe.setup.dataset.prefix}.SZWELOAD'" &&
+cd ../../components/launcher/bin
+cp zowe_launcher "//'{zowe.setup.dataset.prefix}.SZWEAUTH'" &&
+cd ../../zss/SAMPLIB &&
+cp ZWESASTC ZWESIP00 ZWESISTC ZWESISCH
+   "//'{zowe.setup.dataset.prefix}.SZWESAMP'" &&
+cd ../LOADLIB &&
+cp ZWESIS01 ZWESAUX ZWESISDL
+   "//'{zowe.setup.dataset.prefix}.SZWEAUTH'"
+/*
+```
