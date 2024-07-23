@@ -10,6 +10,21 @@ zowe:
       # **COMMONLY_CUSTOMIZED**
       # where Zowe MVS data sets will be installed
       prefix: IBMUSER.ZOWE.2.16.0
+    proclib: USER.PROCLIB
+
+  #-------------------------------------------------------------------------------
+  # Zowe components default configurations
+  #
+  # For each component, they can always have "enabled" property and "certificate"
+  # property.
+  #-------------------------------------------------------------------------------
+  components:
+
+    # >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    api-catalog:
+     enabled: true
+      port: false
+      debug: false
 ```
 
 ## C
