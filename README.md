@@ -120,6 +120,44 @@ cp ZWESIS01 ZWESAUX ZWESISDL
 /*
 ```
 
+## TypeScript
+The imported `common` has various print functions defined. 
+Which error (if any) prints the following code?
+```javascript
+import * as common from './common';
+
+function validateZosmfAsAuthProvider(zosmfHost: string, zosmfPort: number, authProvider: string): boolean {
+  if (zosmfHost && zosmfPort) {
+    if (authProvider == 'zosmf') {
+      common.printError("z/OSMF is not configured. Using z/OSMF as authentication provider is not supported.");
+      return true;
+    }
+  }
+  return false;
+}
+
+const zosmfHost = 'example.com'
+const zosmfPort = 12345;
+const enabledComponents = [ 'zss', 'app-server', 'comm-api' ];
+let privateErrors = 0;
+
+if (zosmfHost && zosmfPort) {
+  if (enabledComponents.includes('discovery') || enabledComponents.includes('*-api')) {
+    let zosmfOk = validateZosmfHostAndPort(zosmfHost, zosmfPort);
+    if (!zosmfOk) {
+      privateErrors++;
+      common.printFormattedError('ZWELS', "zwe-internal-start-prepare,global_validate", "Zosmf validation failed");
+    }
+  } else if (std.getenv('ZWE_components_gateway_apiml_security_auth_provider') == "zosmf") {
+    let zosmfOk = validateZosmfAsAuthProvider(zosmfHost, zosmfPort, 'zosmf');
+    if (!zosmfOk) {
+      privateErrors++;
+      common.printFormattedError('ZWELS', "zwe-internal-start-prepare,global_validate", "Zosmf validation failed");
+    }
+  }
+}
+```
+
 ## Install
 Let's suppose
 * `/zowe/runtime` is valid zowe runtime directory
