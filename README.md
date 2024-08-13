@@ -125,6 +125,7 @@ The imported `common` has various print functions defined.
 Which error (if any) prints the following code?
 ```javascript
 import * as common from './common';
+import * as std from 'cm_std';
 
 function validateZosmfAsAuthProvider(zosmfHost: string, zosmfPort: number, authProvider: string): boolean {
   if (zosmfHost && zosmfPort) {
@@ -140,6 +141,7 @@ const zosmfHost = 'example.com'
 const zosmfPort = 12345;
 const enabledComponents = [ 'zss', 'app-server', 'comm-api' ];
 let privateErrors = 0;
+std.setenv('ZWE_components_gateway_apiml_security_auth_provider', 'zosmf');
 
 if (zosmfHost && zosmfPort) {
   if (enabledComponents.includes('discovery') || enabledComponents.includes('*-api')) {
