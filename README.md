@@ -122,7 +122,7 @@ cp ZWESIS01 ZWESAUX ZWESISDL
 
 ## TypeScript
 The imported `common` has various print functions defined. 
-Which error (if any) prints the following code?
+Which error (if any) will be printed by the following code?
 ```javascript
 import * as common from './common';
 import * as std from 'cm_std';
@@ -159,19 +159,3 @@ if (zosmfHost && zosmfPort) {
   }
 }
 ```
-
-## Install
-Let's suppose
-* `/zowe/runtime` is valid zowe runtime directory
-* User has sufficient rights to create `USER.ZOWE.TEST` datasets
-* Direct command `/zowe/runtime/bin/zwe install --ds-prefix USER.ZOWE.TEST` ends with success
-* Calling the same command from javascript (via [`runme.sh`](runme.sh)) ends with [`result.txt`](result.txt)
-* Use [this repository](https://github.com/zowe/zowe-install-packaging/tree/v2.x/staging/bin) for investigation
-
-<!--
-## Random questions
-* Git
-* ReDoS attack
-* zACS - setuid/getuid
-* Diffie-Hellman
->
