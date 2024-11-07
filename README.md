@@ -161,7 +161,7 @@ if (zosmfHost && zosmfPort) {
 ```
 
 ## JavaScript
-Review this code:
+Review this code, let's suppose all imports are fine:
 ```javascript
 let logExists = false;
 
