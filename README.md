@@ -159,3 +159,26 @@ if (zosmfHost && zosmfPort) {
   }
 }
 ```
+
+## JavaScript
+Review this code:
+```javascript
+let logExists = false;
+
+function writeLog(message) {
+  const filename = std.getenv('ZWE_PRIVATE_LOG_FILE');
+  if (!filename) {
+      return false;
+  }
+  logExists = fs.fileExists(filename);
+  if (!logExists) {
+      fs.createFile(filename, 0o640, message);
+      logExists = fs.fileExists(filename);
+  } 
+  if (logExists) {
+      xplatform.appendFileUTF8(filename, xplatform.AUTO_DETECT, message);
+      return true;
+  }
+  return logExists;
+}
+```
